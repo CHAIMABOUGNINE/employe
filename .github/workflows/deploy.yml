@@ -23,8 +23,14 @@
             java-version: '17'
             cache: maven
 
+
         - name: Build and Test with Maven
+          env:
+            SPRING_DATASOURCE_URL: ${{ secrets.DB_URL }}
+            SPRING_DATASOURCE_USERNAME: ${{ secrets.DB_USERNAME }}
+            SPRING_DATASOURCE_PASSWORD: ${{ secrets.DB_PASSWORD }}
           run: mvn -B clean verify
+
 
         - name: Set up Java 21 for SonarCloud
           uses: actions/setup-java@v4
